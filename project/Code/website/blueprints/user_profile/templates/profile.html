@@ -1,0 +1,100 @@
+{% extends 'base_page.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+<div class="container mt-4">
+    <div class="song mb-3">
+       <div class="row song mb-3" >
+            <div class="col-md-10"><h3>Songs</h3></div>
+            <div class="col-md-2">
+                <a href='{{url_for("user_profile.songs")}}'><button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">Show more</button></a>
+            </div>
+       </div>
+        
+        <div class="row">
+            {% for song in ordered_songs[:3] %}
+                <div class="col-4" >
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <a href="{{ url_for('user_profile.song_details', song_id=song.id) }}"><h5 class="card-title">{{ song.title.title() }}</h5></a>
+                            <p class="card-text">Artist: {{ song.artist.title() }}</p>
+                            <p class="card-text">Date: {{ song.date.strftime('%Y-%m-%d') }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+    <div class="playlist mb-3">
+        <div class="row playlist mb-3">
+            <div class="col-md-10"><h3>Your Playlist</h3></div>
+            <div class="col-md-2">
+                <a href ='{{url_for("user_profile.playlist")}}'><button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">Show more</button></a>
+            </div>
+        </div>
+        <div class="row">
+        {% for playlist in playlists[-4:][::-1] %}
+            <div class="col-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <a href="{{ url_for('user_profile.playlist_details', playlist_id=playlist.id) }}">
+                            <h5 class="card-title">{{ playlist.name.title() }}</h5>
+                        </a>
+                        <!-- Add buttons or links for actions (e.g., play, like, etc.) -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="genre mb-3">
+        <div class="row grnre mb-3">
+            <div class="col-md-10"><h3>Genre</h3></div>
+            <div class="col-md-2">
+                <a href ='{{url_for("user_profile.genres")}}'><button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">Show more</button></a>
+            </div>
+        </div>
+        <div class="row">
+        {% for genre in genres[-4:] %}
+            <div class="col-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <a href="{{ url_for('user_profile.genre_details', genre=genre) }}">
+                            <h5 class="card-title">{{ genre.title() }}</h5>
+                        </a>
+                        <!-- Add buttons or links for actions (e.g., play, like, etc.) -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="song-recent mb-3">
+        <div class="row song mb-3" >
+             <div class="col-md-10"><h3>Recent Releases</h3></div>
+             <div class="col-md-2">
+                 <a href='{{url_for("user_profile.songs")}}'><button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">Show more</button></a>
+             </div>
+        </div>
+         
+         <div class="row">
+             {% for song in songs[-4:][::-1] %}
+                 <div class="col-3">
+                     <div class="card mb-4 box-shadow">
+                         <div class="card-body">
+                             <a href="{{ url_for('user_profile.song_details', song_id=song.id) }}"><h5 class="card-title">{{ song.title.title() }}</h5></a>
+                         </div>
+                     </div>
+                 </div>
+             {% endfor %}
+         </div>
+         
+     </div>
+    
+</div>
+
+{% endblock %}
+     <!-- Song Image (if available) -->
+                        <!-- <img class="card-img-top" src="{{ song.image_url }}" alt="{{ song.title }}"> -->

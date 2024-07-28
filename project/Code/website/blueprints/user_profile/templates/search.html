@@ -1,0 +1,92 @@
+{% extends 'base_page.html' %}
+{% block title %} Search {% endblock %}
+{% block back %}<a class="nav-link" href="/user_profile">Back </a>{% endblock %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <div class="row">
+        {% for song in search_songs %}
+            <div class="card mb-1">
+                <div class="row card-body">
+                    <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
+                        <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2"/>
+                        <path fill-rule="evenodd" d="M9 3v10H8V3z"/>
+                        <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5z"/>
+                    </svg></div>
+                    <div class="col-11">
+                    <a href="{{ url_for('user_profile.song_details', song_id=song.id) }}"><h5 class="card-title">{{ song.title.title() }}</h5></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% for song in search_lyrics %}
+            <div class="card mb-1">
+                <div class="row card-body">
+                    <div class="col-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
+                        <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2"/>
+                        <path fill-rule="evenodd" d="M9 3v10H8V3z"/>
+                        <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5z"/>
+                    </svg></div>
+                    <div class="col-11">
+                    <a href="{{ url_for('user_profile.song_details', song_id=song.id) }}"><h5 class="card-title">{{ song.title.title() }}</h5></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="row">
+        {% set visited_artists = [] %}
+        {% for album in search_artists %}
+            {% if album.artist not in visited_artists %}
+                <div class="card mb-1">
+                    <div class="row card-body">
+                        <div class="col-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>
+                        </div>
+                        <div class="col-11">
+                            <a href="{{ url_for('user_profile.artists', artist=album.artist) }}">
+                                <h5 class="card-title">{{ album.artist.title() }}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% set _ = visited_artists.append(album.artist) %}
+            {% endif %}
+        {% endfor %}
+    </div>
+      
+
+    <div class="row">
+        {% set visited_genres = [] %}
+        {% for album in search_genres %}
+            {% if album.genre not in visited_genres %}
+                <div class="card mb-1">
+                    <div class="row card-body">
+                        <div class="col-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list-nested" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5"/>
+                            </svg>
+                        </div>
+                        <div class="col-11">
+                            <a href="{{ url_for('user_profile.genre_details', genre=album.genre) }}">
+                                <h5 class="card-title">{{ album.genre.title() }}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% set _ = visited_genres.append(album.genre) %}
+            {% endif %}
+        {% endfor %}
+    </div>
+ 
+</div>
+
+{% endblock %}

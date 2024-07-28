@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Album Details{% endblock %} 
+{% block content %}
+
+<div>
+    <h5>{{album.name}}</h5>
+    <p>Singer: {{album.artist}}</p>
+    {% for song in songs %}
+        <div class="album ml-auto"> 
+            <div class="row m-2">
+                <div class="col-md-4">{{song.title}}</div>
+                <div class="col-md-1">
+                    <a href="{{ url_for('creator_profile.song_edit', song_id=song.id, album_id=album.id) }}">
+                        <button class="btn btn-md btn-primary mr-4" type="button">Edit</button>
+                    </a>
+                </div>
+                
+                <div class="col-md-1">
+                    <a href="{{url_for('creator_profile.song_edit', song_id=song.id,album_id=album.id) }}">
+                        <button class="btn btn-md btn-danger mr-4" type="button">Delete</button>
+                    </a>
+                </div>
+                
+            </div>
+            
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

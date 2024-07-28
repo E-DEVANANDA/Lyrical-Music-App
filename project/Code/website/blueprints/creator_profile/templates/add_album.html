@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Add Song{% endblock %} 
+{% block content %}
+<div class="container">
+    <h2>ADD ALBUM</h2>
+    <form method="post">
+      <div class="mb-3 mt-3">
+        <label for="title">Album Title :</label>
+        <input type="title" class="form-control" id="title" placeholder="Enter title" name='title'>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="singer">Singer:</label>
+        <input type="singer" class="form-control" id="singer" placeholder="Enter Singer name" name="singer">
+      </div>
+      <div class="mb-3">
+        <label for="genre">Genre:</label>
+        <input type="genre" class="form-control" id="genre" placeholder="Enter genre" name="genre"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="number_of_songs">Number of Songs:</label>
+        <input type="number_of_songs" class="form-control" id="number_of_songs" placeholder="Enter number of songs " name="number_of_songs"></textarea>
+      </div>
+        <form method="POST">
+        <br />
+        <div align="center">
+        <button type="submit" class="btn btn-primary">Add Song >></button>
+        </div>
+        </form>
+      </div>
+      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+    </form>
+  </div>
+{% endblock %}

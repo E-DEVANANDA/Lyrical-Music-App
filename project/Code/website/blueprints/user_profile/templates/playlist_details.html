@@ -1,0 +1,33 @@
+{% extends 'base_page.html' %}
+{% block title %}playlist songs{% endblock %}
+{% block back %}<a class="nav-link" href="/playlist">Back </a>{% endblock %}
+{% block body %}
+
+<div class="container">
+    <br>
+    <div class="container">
+        <div class="row">
+                <!-- Left side: Song Title, Artist, Date, and Rating -->
+                <div class="card mb-4 box-shadow">
+                <center><h1 class="card-title">{{ playlist.name.title() }}</h1></center>
+                </div>
+                <h2>Songs</h2>
+                {% for song in songs %}
+                <div class="row m-2 border-bottom ">
+                    <div class="col-md-6 m-2 ">
+                        <a href="{{ url_for('user_profile.song_details', song_id=song.id) }}">{{ song.title.title() }}</a>
+                    </div>
+                    <div class="col-md-1  ">
+                        <a href="{{url_for('user_profile.delete_playlist_song', song_id=song.id, playlist_id=playlist.id)}}">
+                            <button type="button" class="btn btn-danger btn-block">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+    {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

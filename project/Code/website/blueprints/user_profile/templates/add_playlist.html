@@ -1,0 +1,29 @@
+
+{% extends 'base_page.html' %}
+{% block title %} Add Plalist {% endblock %}
+{% block back%}
+<a class="nav-link" href="/playlist">Back </a>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <label for="title">Playlist Title:</label>
+        <form method="POST" class="d-flex form-inline">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+            </div>
+     </div>
+            <div class="card m-1 p-2">
+                {% for song in songs %}
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="selected_songs" value="{{ song.id }}">
+                        <label class="form-check-label" for="song_{{ song.id }}">{{ song.title }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="btn btn-primary" type="submit">Add playlist</button>
+        </form>
+    
+</div>
+
+{%endblock%}

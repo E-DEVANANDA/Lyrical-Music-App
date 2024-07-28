@@ -1,0 +1,36 @@
+{% extends "admin_base.html" %}
+{% block title %}Admin Profile{% endblock %} 
+{% block butn1 %}
+    <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/tracks">Back</a>
+    </li>
+{% endblock %}
+{% block butn2 %}
+    <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/admin_home">Dashboard</a>
+    </li>
+{% endblock %}
+{% block admin_content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8"><h2 class="mb-4">All Tracks</h2></div>
+            <div class="col-4">
+                <form class="d-flex" method="post" action="{{url_for('admin_profile.search') }}">
+                <input class="form-control form-control-dark" type="text" name="search" placeholder="Search Tracks" aria-label="Search" style="width: 800px; margin-right: 5px;">
+                <button class="btn btn-outline-info" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        {% for song in songs %}
+        <div class="card p-2 m-2">
+            <div class="row card-title">
+                <div class="col-8"><h6 class="card-title">{{song.title.title()}}</h6></div>  
+                <div class="col-2"> <a href="{{url_for('admin_profile.lyrics',song_id=song.id)}}"><button type="button" class="btn btn-outline-success">Read Lyrics</button></a> </div>
+                <div class="col-2"> <a href="{{url_for('admin_profile.deletesong',song_id=song.id)}}"><button type="button" class="btn btn-outline-danger">Delete</button></a> </div>
+            </div>
+        </div> 
+        {% endfor %}
+        
+    </div>
+
+{% endblock %}

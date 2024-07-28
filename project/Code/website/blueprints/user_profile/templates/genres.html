@@ -1,0 +1,23 @@
+{% extends 'base_page.html' %}
+{% block title %} Genres {% endblock %}
+{% block back %}<a class="nav-link" href="/user_profile">Back </a>{% endblock %}
+{% block body %}
+
+<div class="container mt-4">
+    <div class="row">
+        {% for genre in genres %}
+            <div class="col-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <a href="{{ url_for('user_profile.genre_details', genre=genre) }}">
+                            <h5 class="card-title">{{ genre }}</h5>
+                        </a>
+                        <!-- Add buttons or links for actions (e.g., play, like, etc.) -->
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+</div>
+
+{% endblock %}

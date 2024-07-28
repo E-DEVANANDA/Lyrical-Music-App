@@ -1,0 +1,33 @@
+{% extends 'base_page.html' %}
+{% block title %} Songs {% endblock %}
+{% block back %}<a class="nav-link" href="/user_profile">Back </a>{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div class="Songs">
+       <div class="row" >
+            <div class="col-md-10"><h1><center>Songs</center></h1></div>
+       </div>
+        
+        <div class="row">
+            {% for song in songs %}
+                <div class="col-4">
+                    <div class="card mb-4 box-shadow">
+                        <!-- Song Image (if available) -->
+                        <!-- <img class="card-img-top" src="{{ song.image_url }}" alt="{{ song.title }}"> -->
+                        
+                        <div class="card-body">
+                            <a href="{{ url_for('user_profile.song_details', song_id=song.id) }}"><h5 class="card-title">{{ song.title.title() }}</h5></a>
+                            <p class="card-text">Artist: {{ song.artist.title() }}</p>
+                            <p class="card-text">Date: {{ song.date.strftime('%Y-%m-%d') }}</p>
+                            <!-- Add more details here as needed -->
+        
+                            <!-- Add buttons or links for actions (e.g., play, like, etc.) -->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

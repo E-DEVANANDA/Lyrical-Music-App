@@ -1,0 +1,31 @@
+{% extends 'admin_base.html' %}
+{% block title %} Song Lyrics {% endblock %}
+{% block butn1 %}
+    <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/admin_home">Back</a>
+    </li>
+{% endblock %}
+{% block admin_content %}
+
+<div class="container">
+    <div class="row">
+            <!-- Left side: Song Title, Artist, Date, and Rating -->
+            <div class="card mb-4 box-shadow">
+            <center><h1 class="card-title">{{ song.title.title() }}</h1></center>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Artist: {{ song.artist.title() }}</p>
+                    <p>Date: {{ song.date.strftime('%Y-%m-%d') }}</p>
+                
+                </div>                
+            </div>
+            <h2>Lyrics</h2>
+            {% for line in song.data.split('\n') %}
+            <p>{{ line.title() }}</p>
+            {% endfor %}
+        
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %} {% block title %}Creator Home{% endblock %} 
+{% block content %}
+<div class="container-fluid">
+<div class="row mb-4 justify-content-center ">
+  <h5>Creator-page </h5>
+  <h2> Dashboard</h2>
+  <div class="col-md-3 m-2 p-3 mx-3 card">
+    <h5 class="card-title text-center">Total Songs Uploaded</h5>
+    {% if creator.songs|length > 0 %}
+      <h4 class="text-center">{{ creator.songs|length }}</h4>
+    {% else %}
+      <h4 class="text-center">0</h4>
+    {% endif %}
+  </div>
+  <div class="col-md-3 m-2 p-3 mx-3 card">
+    <h5 class="card-title text-center">Average Rating</h5>
+    <h4 class="text-center">{{avg}}</h4>
+  </div>
+  <div class="col-md-3 m-2 p-3 mx-3 card">
+    <h5 class="card-title text-center">Total Albums</h5>
+    <h4 class="text-center">{{album}}</h4>
+  </div>
+</div>
+
+<div class="row border border-top" style="border-radius: 10px;">
+    <form method="POST">
+      <div class='m-2'>
+        <center><button type="submit" class="btn btn-outline-primary">Add New Song/Album</button></center>
+      </div>
+    </form>
+  <div class="col-md-6">
+    <h5 align="center">Songs</h5>
+    
+    <ul class="list-group list-group-flush" id="songs">
+      {% for song in creator.songs[::-1] %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{{ url_for('creator_profile.song_edit', song_id=song.id, album_id=song.album_id) }}">
+          {{ song.title.title() }}
+      </a>
+      <a href="{{url_for('creator_profile.dltsong',song_id=song.id)}}">
+        <button type="button" class="btn btn-outline-danger"> Delete </button>
+      </a>
+      </li>
+      {% endfor %}
+  </ul>
+
+  </div>
+  <div class="col-md-6">
+    <h5 align="center">Albums</h5>
+
+    <ul class="list-group list-group-flush" id="albums">
+      {% set seen = [] %}
+      {% for album in creator.albums[::-1] %}
+        {% if album.name not in seen %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{url_for('creator_profile.album_details',album_id=album.id)}}"> {{ album.name.title() }}</a>
+            <a href="{{url_for('creator_profile.deletealbum',album_id=album.id)}}">
+              <button type="button" class="btn btn-outline-danger"> Delete </button>
+            </a>
+          </li>
+          {% set _ = seen.append(album.name) %}
+        {% endif %}
+      {% endfor %}
+  </ul>
+  
+</div> 
+  </div>
+  </div>
+
+    {% endblock %}

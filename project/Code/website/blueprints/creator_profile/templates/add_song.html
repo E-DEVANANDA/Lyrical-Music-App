@@ -1,0 +1,38 @@
+
+{% extends "base.html" %} {% block title %}Add Song{% endblock %} 
+{% block content %}
+<div class="container">
+    <h2 align="center">ADD SONG</h2>
+    <!-- <form method="post">
+      <div class="mb-3 mt-3">
+        <label for="title">Title :</label>
+        <input type="title" class="form-control" id="title" placeholder="Enter title" name='title'>
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="singer">Singer:</label>
+        <input type="singer" class="form-control" id="singer" placeholder="Enter Singer name" name="singer">
+      </div>
+      <div class="mb-3">
+        <label for="lyrics">Lyrics:</label>
+        <textarea class="form-control" id="lyrics" placeholder="Enter lyrics" name="lyrics"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form> -->
+    <form method="post">
+      {% for i in range(count) %}
+          <h3>Track {{i+1}}</h3>
+          <div class="mb-3 mt-3">
+              <label for="title_{{ i }}">Title:</label>
+              <input type="text" class="form-control" id="title_{{ i }}" name="title_{{ i }}" required>
+          </div>
+          <div class="mb-3">
+              <label for="lyrics_{{ i }}">Lyrics:</label>
+              <textarea class="form-control" id="lyrics_{{ i }}" name="lyrics_{{ i }}" required></textarea>
+          </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+  </div>
+
+{% endblock %}

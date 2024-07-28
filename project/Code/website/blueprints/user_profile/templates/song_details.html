@@ -1,0 +1,67 @@
+{% extends 'base_page.html' %}
+{% block title %} Song {% endblock %}
+{% block back %}<a class="nav-link" href="/user_profile">Back </a>{% endblock %}
+{% block body %}
+<div class="container">
+<br>
+<div class="container">
+    <div class="row">
+            <!-- Left side: Song Title, Artist, Date, and Rating -->
+            <div class="card mb-4 box-shadow">
+            <center><h1 class="card-title">{{ song.title.title() }}</h1></center>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Artist: {{ song.artist.title() }}</p>
+                    <p>Date: {{ song.date.strftime('%Y-%m-%d') }}</p>
+                    <p>Rating: {{rate_score}}</p>
+                    <!-- Add your rating display here, e.g., stars or numeric rating -->
+            
+                    <!-- Right side: Lyrics -->
+                </div>
+                <div class="col-md-4 ml-auto">
+                    <form method="POST">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">5</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">4</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">3</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">2</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">1</label>
+                        
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-ok"> Rating</span>
+                        </button>
+                    </form>
+                    
+                </div>
+                
+            </div>
+            <h2>Lyrics</h2>
+            {% for line in song.data.split('\n') %}
+            <p>{{ line.title() }}</p>
+            {% endfor %}
+        
+    </div>
+</div>
+
+</div>
+
+<!-- <div class="container mt-5">
+    <h1>Song Details</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Title: {{ song.title }}</h5>
+            <p class="card-text">Artist:{{ song.artist }}</p>
+            <p class="card-text">Date: {{ song.date.strftime('%Y-%m-%d') }}</p>
+            <hr>
+            <h5>Lyrics</h5>
+            <p>{{ song.data }}</p>
+        </div>
+    </div>
+
+</div> -->
+{% endblock %}

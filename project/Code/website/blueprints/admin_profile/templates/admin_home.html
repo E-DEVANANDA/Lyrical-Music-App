@@ -1,0 +1,71 @@
+{% extends "admin_base.html" %}
+{% block title %}Admin Profile{% endblock %} 
+
+{% block butn2 %}
+    <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/tracks">Tracks</a>
+    </li>
+{% endblock %}
+{% block admin_content %}
+<div class="container">
+    <div class="row ">
+        <div class="col-4  ">
+            <ul>
+            <div class="card mb-3 p-5" style="background-color: #D4D7DB;">
+
+                <center> 
+                <h4 class="card-title m-3">Normal User</h4>
+                <h4>{{count[1]}}</h4>
+                </center>
+            </div>
+            <div class="card mb-3 p-5" style="background-color: #D4BBA9;">
+                <center>
+                <h4 class="card-title m-3">Normal Creator</h4>
+                <h4>{{count[2]}}</h4>
+                </center>
+            </div>
+            </ul>
+        </div>
+    <div class="col-8">
+        <h4 class="mb-3  "> App Performace</h4>
+        <div class="row d-flex justify-content-center">
+            
+            <div class="col-3 card text-white bg-info mb-3 p-2" style="max-width: 18rem;">
+                <center>
+                <h5>Tracks</h5>
+                <h5>{{count[0]}}</h5>
+                </center>
+            </div>
+            <div class="col-3 card text-white bg-success mb-3 p-2" style="max-width: 18rem;margin-left: 0.5rem; margin-right: 0.5rem;">
+                <center>
+                    <h5>Albums</h5>
+                    <h5>{{count[3]}}</h5>
+                    </center>
+            </div>
+            <div class="col-3 card text-white bg-warning mb-3 p-2" style="max-width: 18rem;">
+                <center>
+                    <h5>Genres</h5>
+                    <h5>{{count[4]}}</h5>
+                    </center>
+            </div>
+        </div>
+        {% if rated_song %}
+        <div class="row p-3">
+            <h4>Popular:</h4>
+            <div class="song m-4">
+                <h5 class="card p-2">Top rated Song: {{rated_song.title.title()}}</h5>
+                <h5 class="card p-2">Top rated Album: {{rated_album.name.title()}}</h5>
+                <h5 class="card p-2">Top rated Artist: {{rated_artist.title()}}</h5>
+            </div>
+            
+        </div>
+        {% else %}
+            <div class="row p-3">
+                <h4>No popular song found.</h4>
+            </div>
+        {% endif %}
+    </div>
+        
+    </div>
+</div>
+{% endblock %}

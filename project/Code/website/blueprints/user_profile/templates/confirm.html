@@ -1,0 +1,25 @@
+{% extends 'base_page.html' %}
+{% block title %}creator confirm{% endblock %}
+
+{%block content%}
+<div class="container mt-4">
+    <h2>Welcome, {{ current_user.email }}!</h2>
+
+    {% if current_user.role == 'user' %}
+        <div class="alert alert-info" role="alert">
+            You are currently a regular user.
+        </div>
+        <form action="{{ url_for('user_profile.upgrade_to_creator') }}" method="POST">
+            <button type="submit" class="btn btn-primary">Become a Creator</button>
+        </form>
+    {% elif current_user.role == 'creator' %}
+        <div class="alert alert-success" role="alert">
+            You are already a creator.
+            <button type="submit" class="btn btn-primary"></button>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
